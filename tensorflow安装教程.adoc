@@ -1,0 +1,144 @@
+==== *python安装 通过（python发行版）anaconda3安装:*
+
+    linux命令安装：bash Anaconda3-5.0.1-Linux-x86_64.sh
+        Please answer 'yes' or 'no':'
+        >>> yes----------------------------------(接受协议)
+        Anaconda3 will now be installed into this location:
+        /root/anaconda3
+          - Press ENTER to confirm the location
+          - Press CTRL-C to abort the installation
+          - Or specify a different location below
+        [/root/anaconda3] >>> /home/anaconda3---(定义安装路径)
+        PREFIX=/home/anaconda3
+        installing: python-3.6.3-hc9025b9_1 ...
+        Python 3.6.3 :: Anaconda, Inc.
+        installing: ca-certificates-2017.08.26-h1d4fec5_0 ...
+        installing: conda-env-2.6.0-h36134e3_1 ...
+        Do you wish the installer to prepend the Anaconda3 install location
+        to PATH in your /root/.bashrc ? [yes|no]
+        [no] >>> no----------------------------(是否生成环境变量,手动配置)
+        .....
+    配置环境变量:
+        vim /etc/profile
+        末行添加 export PATH=/home/anaconda3/bin:$PATH(对应安装路径)
+        source /etc/profile(使配置文件生效)
+    验证anaconda安装是否成功:
+        anaconda -V
+            anaconda Command line client (version 1.6.5)
+    验证python安装是否成功:
+        python
+            Python 3.6.3 |Anaconda, Inc.| (default, Oct 13 2017, 12:02:49) 
+            [GCC 7.2.0] on linux
+            Type "help", "copyright", "credits" or "license" for more information.
+            >>> 
+    查看anaconda自带的python版本:conda list |grep  python 
+    替换anaconda自带的python版本:conda install python=3.5 (in the root environment)
+
+   
+==== tensorflow 安装:
+
+    命令:pip install tensorflow
+        Collecting tensorflow
+          Downloading tensorflow-1.6.0-cp36-cp36m-manylinux1_x86_64.whl (45.8MB)
+            100% |████████████████████████████████| 45.9MB 25kB/s 
+        Collecting termcolor>=1.1.0 (from tensorflow)
+          Downloading termcolor-1.1.0.tar.gz
+        Collecting gast>=0.2.0 (from tensorflow)
+          Downloading gast-0.2.0.tar.gz
+        ...
+        Successfully built termcolor gast absl-py html5lib
+        Installing collected packages: termcolor, gast, protobuf, absl-py, grpcio, html5lib, bleach, markdown, tensorboard, astor, tensorflow
+          Found existing installation: html5lib 0.999999999
+            Uninstalling html5lib-0.999999999:
+              Successfully uninstalled html5lib-0.999999999
+          Found existing installation: bleach 2.0.0
+            Uninstalling bleach-2.0.0:
+              Successfully uninstalled bleach-2.0.0
+        Successfully installed absl-py-0.1.11 astor-0.6.2 bleach-1.5.0 gast-0.2.0 grpcio-1.10.0 html5lib-0.9999999 markdown-2.6.11 protobuf-3.5.2 tensorboard-1.6.0 tensorflow-1.6.0 termcolor-1.1.0
+
+==== 验证tensorflow是否安装成功
+    
+        python
+        >>> import tensorflow as tf 
+       报错:
+       Traceback (most recent call last):
+          File "/home/anaconda3/lib/python3.6/site-packages/tensorflow/python/pywrap_tensorflow.py", line 58, in <module>
+            from tensorflow.python.pywrap_tensorflow_internal import *
+          File "/home/anaconda3/lib/python3.6/site-packages/tensorflow/python/pywrap_tensorflow_internal.py", line 28, in <module>
+            _pywrap_tensorflow_internal = swig_import_helper()
+          File "/home/anaconda3/lib/python3.6/site-packages/tensorflow/python/pywrap_tensorflow_internal.py", line 24, in swig_import_helper
+            _mod = imp.load_module('_pywrap_tensorflow_internal', fp, pathname, description)
+          File "/home/anaconda3/lib/python3.6/imp.py", line 243, in load_module
+            return load_dynamic(name, filename, file)
+          File "/home/anaconda3/lib/python3.6/imp.py", line 343, in load_dynamic
+            return _load(spec)
+        ImportError: /lib64/libc.so.6: version `GLIBC_2.17' not found (required by /home/anaconda3/lib/python3.6/site-packages/tensorflow/python/_pywrap_tensorflow_internal.so)
+    查看GLIBC版本(缺少GLIBC_2.17):
+        # strings /lib64/libc.so.6 |grep GLIBC_
+            GLIBC_2.2.5
+            GLIBC_2.2.6
+            GLIBC_2.3
+            GLIBC_2.3.2
+            GLIBC_2.3.3
+            GLIBC_2.3.4
+            GLIBC_2.4
+            GLIBC_2.5
+            GLIBC_2.6
+            GLIBC_2.7
+            GLIBC_2.8
+            GLIBC_2.9
+            GLIBC_2.10
+            GLIBC_2.11
+            GLIBC_2.12
+            GLIBC_PRIVATE
+    安装GLIBC_2.17版本:
+        tar -zxvf glibc-2.17.tar.gz
+        cd glibc-2.17
+        mkdir build
+        cd build
+        ../configure --prefix=/usr
+        make && make install
+    查看GLIC版本:
+        ldd --version 
+            ldd (GNU libc) 2.17
+    验证tensorflow:
+        python
+        >>> import tensorflow as tf 
+        报错:
+        Traceback (most recent call last):
+          File "/home/anaconda3/lib/python3.5/site-packages/tensorflow/python/pywrap_tensorflow.py", line 58, in <module>
+            from tensorflow.python.pywrap_tensorflow_internal import *
+          File "/home/anaconda3/lib/python3.5/site-packages/tensorflow/python/pywrap_tensorflow_internal.py", line 28, in <module>
+            _pywrap_tensorflow_internal = swig_import_helper()
+          File "/home/anaconda3/lib/python3.5/site-packages/tensorflow/python/pywrap_tensorflow_internal.py", line 24, in swig_import_helper
+            _mod = imp.load_module('_pywrap_tensorflow_internal', fp, pathname, description)
+          File "/home/anaconda3/lib/python3.5/imp.py", line 243, in load_module
+            return load_dynamic(name, filename, file)
+          File "/home/anaconda3/lib/python3.5/imp.py", line 343, in load_dynamic
+            return _load(spec)
+        ImportError: /usr/lib64/libstdc++.so.6: version `CXXABI_1.3.7' not found (required by /home/anaconda3/lib/python3.5/site-packages/tensorflow/python/_pywrap_tensorflow_internal.so)
+        ...
+        for some common reasons and solutions.  Include the entire stack trace
+        above this error message when asking for help.
+    查看gcc版本(缺少CXXABI_1.3.7):
+        strings /usr/lib64/libstdc++.so.6 | grep CXXABI
+            CXXABI_1.3
+            CXXABI_1.3.1
+            CXXABI_1.3.2
+            CXXABI_1.3.3
+    修改libstdc++.so.6软连接地址:
+        cd /usr/lib64/
+        mv libstdc++.so.6 libstdc++.so.6.bak
+        ln -s /home/anaconda3/lib/libstdc++.so.6.0.24 libstdc++.so.6 (前面路径是安装的anaconda3的路径) (解决gcc版本问题)  
+    验证tensorflow:
+        python
+        >>> import tensorflow as tf
+        >>> tf.__version__
+        '1.6.0'
+        
+
+
+
+
+
+
