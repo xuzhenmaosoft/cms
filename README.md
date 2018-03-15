@@ -1,4 +1,4 @@
-模型训练分布在4个节点进行测试验证：
+模型训练分布在4个节点进行测试：
 
     一台ps服务器，一台chief服务器（master节点），两台worker服务器
 Train_model_DNN_Cluster.py,Train_model_Linear_Cluster模型训练代码中指定了
