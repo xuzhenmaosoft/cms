@@ -10,4 +10,3 @@ print("checkout branch2"+str1)
 print("checkout branch3"+str1)
 print("checkout branch4"+str1)
 print(str1)
-
