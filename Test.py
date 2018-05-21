@@ -5,4 +5,5 @@ str4 = str3.split(',')
 print("checkout branch2"+str1)
 print("checkout branch3"+str1)
 print("checkout branch2"+str1)
+print("checkout branch3"+str1)
 
