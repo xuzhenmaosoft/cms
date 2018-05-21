@@ -4,4 +4,5 @@ str3 ='tf-3:22221,tf-4:22221'
 str4 = str3.split(',')
 print("checkout branch2"+str1)
 print("checkout branch3"+str1)
+print("checkout branch2"+str1)
 
