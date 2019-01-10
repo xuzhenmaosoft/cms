@@ -1,0 +1,17 @@
+Index: Test.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>str1 = 'tf-1:22221 '\nstr2 = 'tf-2:22221 '\nstr3 ='tf-3:22221,tf-4:22221'\nstr4 = str3.split(',')\nprint(\"checkout branch2\"+str1)
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Test.py	(date 1547116346000)
++++ Test.py	(date 1547118311971)
+@@ -2,4 +2,4 @@
+ str2 = 'tf-2:22221 '
+ str3 ='tf-3:22221,tf-4:22221'
+ str4 = str3.split(',')
+-print("checkout branch2"+str1)
+\ No newline at end of file
++print("checkout branch2"+str1);
+\ No newline at end of file
