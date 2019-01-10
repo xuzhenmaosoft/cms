@@ -8,4 +8,4 @@ print("checkout branch3"+str1)
 str = 'master'
 print(str1)
 print(str1)
-
+str = 'master'
