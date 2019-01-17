@@ -13,7 +13,11 @@ print(str1)
 print(str1)
 <<<<<<< HEAD
 print(str1)
+<<<<<<< HEAD
 =======
 
 
 >>>>>>> shanchu2
+=======
+str = 'master'
+>>>>>>> master
