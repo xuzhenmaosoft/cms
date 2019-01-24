@@ -9,6 +9,6 @@ print("checkout branch4"+str1)
 print("checkout branch2"+str1)
 print("checkout branch3"+str1)
 print("checkout branch4"+str1)
-23432432423
+print(str1)
 
 
